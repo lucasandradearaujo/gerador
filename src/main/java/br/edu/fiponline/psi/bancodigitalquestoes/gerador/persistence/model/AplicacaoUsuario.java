@@ -15,6 +15,14 @@ public class AplicacaoUsuario extends EntidadeAbstrata{
     @OneToOne
     private Professor professor;
 
+    public AplicacaoUsuario(){}
+
+    public AplicacaoUsuario (AplicacaoUsuario aplicacaoUsuario){
+        this.usuario = aplicacaoUsuario.usuario;
+        this.senha = aplicacaoUsuario.senha;
+        this.professor = aplicacaoUsuario.professor;
+    }
+
     public String getUsuario() {
         return usuario;
     }
