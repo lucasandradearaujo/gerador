@@ -6,20 +6,20 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-public class Professor extends EntidadeAbstrata{
-    @NotEmpty(message = "O campo de nome não pode ser vazio")
-    private String nome;
-    @Email(message = "O email não é válido")
-    @NotEmpty(message = "O campo de email não pode ser vazio")
+public class Professor extends AbstractEntity {
+    @NotEmpty(message = "O cmapo de nome não pode ser vazio!")
+    private String name;
+    @Email(message = "O email não é válido!")
+    @NotEmpty(message = "O campo de email não pode ser vazio!")
     @Column(unique = true)
     private String email;
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {

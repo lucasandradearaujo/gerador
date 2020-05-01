@@ -1,6 +1,6 @@
 package br.edu.fiponline.psi.bancodigitalquestoes.gerador.security.service;
 
-import br.edu.fiponline.psi.bancodigitalquestoes.gerador.persistence.model.AplicacaoUsuario;
+import br.edu.fiponline.psi.bancodigitalquestoes.gerador.persistence.model.ApplicationUser;
 import br.edu.fiponline.psi.bancodigitalquestoes.gerador.persistence.repository.ApplicationUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,36 +25,25 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AplicacaoUsuario applicationUser = loadApplicationUserByUsername(username);
+        ApplicationUser applicationUser = loadApplicationUserByUsername(username);
         return new CustomUserDetails(applicationUser);
     }
 
-    public AplicacaoUsuario loadApplicationUserByUsername(String username) {
+    public ApplicationUser loadApplicationUserByUsername(String username) {
         return Optional.ofNullable(applicationUserRepository.findByUsername(username))
-                .orElseThrow(() -> new UsernameNotFoundException("Aplicação de usuário não encontrado!"));
+                .orElseThrow(() -> new UsernameNotFoundException("ApplicationUser not found"));
     }
 
-    private final static class CustomUserDetails extends AplicacaoUsuario implements UserDetails {
-
-        private CustomUserDetails(AplicacaoUsuario aplicacaoUsuario){
-            super(aplicacaoUsuario);
+    private final static class CustomUserDetails extends ApplicationUser implements UserDetails {
+        private CustomUserDetails(ApplicationUser applicationUser) {
+            super(applicationUser);
         }
 
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
             List<GrantedAuthority> authorityListProfessor = AuthorityUtils.createAuthorityList("ROLE_PROFESSOR");
-            List<GrantedAuthority> authorityListEstudante = AuthorityUtils.createAuthorityList("ROLE_ESTUDANTE");
-            return this.getProfessor() != null ? authorityListProfessor : authorityListEstudante;
-        }
-
-        @Override
-        public String getPassword() {
-            return null;
-        }
-
-        @Override
-        public String getUsername() {
-            return null;
+            List<GrantedAuthority> authorityListStudent = AuthorityUtils.createAuthorityList("ROLE_STUDENT");
+            return this.getProfessor() != null ? authorityListProfessor : authorityListStudent;
         }
 
         @Override
