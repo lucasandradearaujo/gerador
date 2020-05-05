@@ -1,6 +1,6 @@
 package br.edu.fiponline.psi.bancodigitalquestoes.gerador;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest

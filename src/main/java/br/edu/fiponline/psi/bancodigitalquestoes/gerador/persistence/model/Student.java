@@ -7,7 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
-public class Professor extends AbstractEntity {
+public class Student extends AbstractEntity {
     @NotEmpty(message = "O campo de nome não pode ser vazio")
     private String name;
     @Email(message = "O email não é válido")
@@ -32,33 +32,38 @@ public class Professor extends AbstractEntity {
     }
 
     public static final class Builder {
-        private Professor professor;
+        private Student student;
 
         private Builder() {
-            professor = new Professor();
+            student = new Student();
         }
 
-        public static Builder newProfessor() {
+        public static Builder newStudent() {
             return new Builder();
         }
 
-        public Builder name(String name) {
-            professor.setName(name);
+        public Builder id(Long id) {
+            student.setId(id);
             return this;
         }
 
-        public Builder id(Long id) {
-            professor.setId(id);
+        public Builder name(String name) {
+            student.setName(name);
+            return this;
+        }
+
+        public Builder enabled(boolean enabled) {
+            student.setEnabled(enabled);
             return this;
         }
 
         public Builder email(String email) {
-            professor.setEmail(email);
+            student.setEmail(email);
             return this;
         }
 
-        public Professor build() {
-            return professor;
+        public Student build() {
+            return student;
         }
     }
 }

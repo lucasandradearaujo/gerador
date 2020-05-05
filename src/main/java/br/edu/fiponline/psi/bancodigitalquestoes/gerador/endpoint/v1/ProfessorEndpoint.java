@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("v1/professor")
 public class ProfessorEndpoint {
@@ -24,9 +22,9 @@ public class ProfessorEndpoint {
     }
 
     @GetMapping(path = "{id}")
-    @ApiOperation(value = "Buscar professor por ID", notes = "Temos que melhorar esse método", response = Professor.class)
+    @ApiOperation(value = "Encontrar professor por seu ID", notes = "Temos que melhorar esse método", response = Professor.class)
     public ResponseEntity<?> getProfessorById(@PathVariable long id) {
-        Optional<Professor> professor = professorRepository.findById(id);
+        Professor professor = professorRepository.findOne(id);
         return new ResponseEntity<>(professor, HttpStatus.OK);
     }
 }
