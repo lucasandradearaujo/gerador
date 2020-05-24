@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Course extends AbstractEntity {
     @NotEmpty(message = "O campo de nome não pode ser vazio")
-    @ApiModelProperty(notes = "O nome do curso")
+    @ApiModelProperty(notes = "Nome do curso")
     private String name;
     @ManyToOne(optional = false)
     private Professor professor;

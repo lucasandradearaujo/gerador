@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 public class Question extends AbstractEntity {
     @NotEmpty(message = "O campo de título não pode ser vazio")
-    @ApiModelProperty(notes = "TO título da questão")
+    @ApiModelProperty(notes = "Título da questão")
     private String title;
     @ManyToOne(optional = false)
     private Course course;

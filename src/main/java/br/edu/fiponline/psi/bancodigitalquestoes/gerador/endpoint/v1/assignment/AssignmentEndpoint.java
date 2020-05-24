@@ -53,7 +53,7 @@ public class AssignmentEndpoint {
         return new ResponseEntity<>(assignmentRepository.listAssignemntsByCourseAndTitle(courseId, title), OK);
     }
 
-    @ApiOperation(value = "Excluir uma tarefa específica retornar 200")
+    @ApiOperation(value = "Excluir uma tarefa específica retornar 200 Ok sem corpo")
     @DeleteMapping(path = "{id}")
     @Transactional
     public ResponseEntity<?> delete(@PathVariable long id) {
@@ -63,7 +63,7 @@ public class AssignmentEndpoint {
         return new ResponseEntity<>(OK);
     }
 
-    @ApiOperation(value = "Update assignment and return 200")
+    @ApiOperation(value = "Atualizar atribuição e devolver 200 Ok sem corpo")
     @PutMapping
     public ResponseEntity<?> update(@Valid @RequestBody Assignment assignment) {
         validateAssignmentExistenceOnDB(assignment.getId());

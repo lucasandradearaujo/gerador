@@ -17,7 +17,6 @@ import java.io.IOException;
 
 import static br.edu.fiponline.psi.bancodigitalquestoes.gerador.security.filter.Constants.*;
 
-
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     private final CustomUserDetailsService customUserDetailsService;
 

@@ -8,10 +8,10 @@ import javax.persistence.Entity;
 
 @Entity
 public class Professor extends AbstractEntity {
-    @NotEmpty(message = "O campo de nome não pode ser vazio")
+    @NotEmpty(message = "O cmapo nome não pode ser vazio")
     private String name;
     @Email(message = "O email não é válido")
-    @NotEmpty(message = "O campo de email não pode ser vazio")
+    @NotEmpty(message = "O campo email nao pode ser vazio")
     @Column(unique = true)
     private String email;
 

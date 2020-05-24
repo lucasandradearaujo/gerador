@@ -1,5 +1,6 @@
 package br.edu.fiponline.psi.bancodigitalquestoes.gerador.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -15,7 +16,7 @@ public class Choice extends AbstractEntity{
     private String title;
     @NotNull(message = "O campo correctAnswer deve ser verdadeiro ou falso")
     @ApiModelProperty(notes = "Resposta correta para a pergunta associada, você pode ter apenas uma resposta correta por pergunta")
-    @Column(columnDefinition = "boolean default false", nullable = false)
+    @Column(columnDefinition = "padrão booleano false", nullable = false)
     private boolean correctAnswer = false;
     @ManyToOne(optional = false)
     private Question question;

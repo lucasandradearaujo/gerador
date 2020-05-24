@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+
 @Entity
 @ApiModel(description = "Esta será a turma responsável por gerar o exame para os alunos," +
         "A soma de todas as perguntas deve ser igual a 100")

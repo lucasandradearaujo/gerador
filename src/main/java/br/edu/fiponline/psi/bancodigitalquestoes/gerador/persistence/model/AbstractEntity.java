@@ -8,7 +8,7 @@ public class AbstractEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long id;
-    @Column(columnDefinition = "boolean default true", nullable = false)
+    @Column(columnDefinition = "padrão booleano true", nullable = false)
     private boolean enabled = true;
     @Override
     public boolean equals(Object o) {

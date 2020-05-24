@@ -39,20 +39,20 @@ public class QuestionEndpoint {
         this.endpointUtil = endpointUtil;
     }
 
-    @ApiOperation(value = "Retorne a questão com base em seu id", response = Question.class)
+    @ApiOperation(value = "Retornar uma pergunta com base em seu ID", response = Question.class)
     @GetMapping(path = "{id}")
     public ResponseEntity<?> getQuestionById(@PathVariable long id) {
         return endpointUtil.returnObjectOrNotFound(questionRepository.findOne(id));
     }
 
-    @ApiOperation(value = "Retorne uma lista de questões com base no curso", response = Question[].class)
+    @ApiOperation(value = "Retornar uma lista de perguntas relacionadas ao curso", response = Question[].class)
     @GetMapping(path = "list/{courseId}/")
     public ResponseEntity<?> listQuestions(@PathVariable long courseId,
-                                           @ApiParam("Título da questão") @RequestParam(value = "title", defaultValue = "") String title) {
+                                           @ApiParam("Question title") @RequestParam(value = "title", defaultValue = "") String title) {
         return new ResponseEntity<>(questionRepository.listQuestionsByCourseAndTitle(courseId, title), OK);
     }
 
-    @ApiOperation(value = "Exclua uma pergunta específica e todas as opções relacionadas e retorne 200")
+    @ApiOperation(value = "Exclua uma pergunta específica e todas as opções relacionadas e retorne 200 OK sem corpo")
     @DeleteMapping(path = "{id}")
     @Transactional
     public ResponseEntity<?> delete(@PathVariable long id) {
@@ -61,7 +61,7 @@ public class QuestionEndpoint {
         return new ResponseEntity<>(OK);
     }
 
-    @ApiOperation(value = "Atualizar pergunta e retornar 200")
+    @ApiOperation(value = "Atualizar pergunta e retornar 200 Ok sem corpo")
     @PutMapping
     public ResponseEntity<?> update(@Valid @RequestBody Question question) {
         validateQuestionExistenceOnDB(question.getId());
@@ -73,7 +73,7 @@ public class QuestionEndpoint {
         service.throwResourceNotFoundIfDoesNotExist(id, questionRepository, "Questão não encontrada");
     }
 
-    @ApiOperation(value = "Crie uma questão e retorne-a", response = Question.class)
+    @ApiOperation(value = "Crie uma pergunta e retorne a pergunta criada", response = Question.class)
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody Question question) {
         service.throwResourceNotFoundIfDoesNotExist(question.getCourse(), courseRepository, "Curso não encontrado");

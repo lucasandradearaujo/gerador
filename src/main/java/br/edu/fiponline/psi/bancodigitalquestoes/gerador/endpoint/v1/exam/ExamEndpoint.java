@@ -50,7 +50,7 @@ public class ExamEndpoint {
         this.endpointUtil = endpointUtil;
     }
 
-    @ApiOperation(value = "Valide se o aluno já respondeu ao exame, retorna 409 se sim, 200, se não")
+    @ApiOperation(value = "Valide se o aluno já respondeu ao exame, retorna 409 se sim, 200 sem corpo, se não")
     @GetMapping(path = "validate/{accessCode}")
     public ResponseEntity<?> validateAccessCode(@PathVariable String accessCode) {
         throwConflictExceptionIfStudentAlreadyAnswered(accessCode);
@@ -78,7 +78,7 @@ public class ExamEndpoint {
     private void throwResourceNotFoundExceptionIfAccessCodeDoesNotExists(String accessCode) {
         Assignment assignment = assignmentRepository.findAssignmentByAccessCode(accessCode);
         if (assignment == null)
-            throw new ResourceNotFoundException("Código de acesso inválido");
+            throw new ResourceNotFoundException("Código de Acesso Inválido");
     }
 
     @ApiOperation(value = "Salvar as respostas dos alunos")
@@ -86,7 +86,7 @@ public class ExamEndpoint {
     @Transactional
     public ResponseEntity<?> save(@PathVariable String accessCode, @RequestBody Map<Long, Long> questionChoiceIdsMap) {
         Assignment assignment = assignmentRepository.findAssignmentByAccessCode(accessCode);
-        if (assignment == null) throw new ResourceNotFoundException("Código de acesso inválido");
+        if (assignment == null) throw new ResourceNotFoundException("Código de Acesso Inválido");
         internallySaveExamAnswer(questionChoiceIdsMap, assignment);
         return new ResponseEntity<>(OK);
     }

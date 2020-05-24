@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
 
 @Entity
 public class Assignment extends AbstractEntity {
-    @NotEmpty(message = "O campo de título não pode ser vazio")
-    @ApiModelProperty(notes = "O título da tarefa")
+    @NotEmpty(message = "O cmapo de título não pode ser vazio")
+    @ApiModelProperty(notes = "Título da tarefa")
     private String title;
     private LocalDateTime createdAt = LocalDateTime.now();
     @ManyToOne(optional = false)

@@ -81,7 +81,7 @@ public class QuestionAssignmentEndpoint {
     }
 
     private void validateQuestionAndAssignmentExistence(@Valid @RequestBody QuestionAssignment questionAssignment) {
-        service.throwResourceNotFoundIfDoesNotExist(questionAssignment.getQuestion(), questionRepository, "Questão não encontrada");
+        service.throwResourceNotFoundIfDoesNotExist(questionAssignment.getQuestion(), questionRepository, "Questão não enconrada");
         service.throwResourceNotFoundIfDoesNotExist(questionAssignment.getAssignment(), assignmentRepository, "Tarefa não encontrada");
     }
 
@@ -92,7 +92,7 @@ public class QuestionAssignmentEndpoint {
         return !questionAssignments.isEmpty();
     }
 
-    @ApiOperation(value = "Exclua uma pergunta específica atribuída a uma tarefa e retorne 200")
+    @ApiOperation(value = "Exclua uma pergunta específica atribuída a uma tarefa e retorne 200 Ok sem corpo")
     @DeleteMapping(path = "{questionAssignmentId}")
     @Transactional
     public ResponseEntity<?> delete(@PathVariable long questionAssignmentId) {
@@ -101,7 +101,7 @@ public class QuestionAssignmentEndpoint {
         return new ResponseEntity<>(OK);
     }
 
-    @ApiOperation(value = "Atualize QuestionAssignment e retorne 200")
+    @ApiOperation(value = "Atualize o QuestionAssignment e retorne 200 Ok sem corpo")
     @PutMapping
     public ResponseEntity<?> update(@Valid @RequestBody QuestionAssignment questionAssignment) {
         validateQuestionAssignmentOnDB(questionAssignment.getId());
@@ -110,11 +110,11 @@ public class QuestionAssignmentEndpoint {
     }
 
     private void validateQuestionAssignmentOnDB(Long questionAssignmentId) {
-        service.throwResourceNotFoundIfDoesNotExist(questionAssignmentId, questionAssignmentRepository, "QuestionAssignment not found");
+        service.throwResourceNotFoundIfDoesNotExist(questionAssignmentId, questionAssignmentRepository, "QuestionAssignment não encontrado");
 
     }
 
-    @ApiOperation(value = "Liste todo QuestionAssignment associado ao assignmentId", response = QuestionAssignment[].class)
+    @ApiOperation(value = "Listar todas as QuestionAssignment associadas a assignmentId", response = QuestionAssignment[].class)
     @GetMapping(path = "{assignmentId}")
     public ResponseEntity<?> list(@PathVariable long assignmentId) {
         return new ResponseEntity<>(questionAssignmentRepository.listQuestionAssignmentByAssignmentId(assignmentId), OK);

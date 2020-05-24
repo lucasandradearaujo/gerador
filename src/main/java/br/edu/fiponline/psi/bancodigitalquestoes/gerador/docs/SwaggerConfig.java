@@ -29,7 +29,7 @@ public class SwaggerConfig {
                 .title("Banco Digital Gerador de Questões")
                 .description("Software para gerar questões/provas com base em perguntas")
                 .version("1.0")
-                .contact(new Contact("Lucas/Hiago", "http://fiponline.edu.br", "lucasaraujo@si.fiponline.edubr"))
+                .contact(new Contact("Lucas/Hiago", "http://fiponline.edu.br", "lucasaraujo@si.fiponline.edu.br"))
                 .license("Apache License Version 2.0")
                 .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
                 .build();

@@ -35,19 +35,19 @@ public class CourseEndpoint {
         this.endpointUtil = endpointUtil;
     }
 
-    @ApiOperation(value = "Retornar um curso com base em sue id", response = Course.class)
+    @ApiOperation(value = "Retornar um curso com base em seu ID", response = Course.class)
     @GetMapping(path = "{id}")
     public ResponseEntity<?> getCourseById(@PathVariable long id) {
         return endpointUtil.returnObjectOrNotFound(courseRepository.findOne(id));
     }
 
-    @ApiOperation(value = "Retorne uma lista de cursos relacionados ao professor", response = Course.class)
+    @ApiOperation(value = "Retornar uma lista de cursos relacionados ao professor", response = Course.class)
     @GetMapping(path = "list")
-    public ResponseEntity<?> listCourses(@ApiParam("Nome do curso") @RequestParam(value = "name", defaultValue = "") String name) {
+    public ResponseEntity<?> listCourses(@ApiParam("Course name") @RequestParam(value = "name", defaultValue = "") String name) {
         return new ResponseEntity<>(courseRepository.listCoursesByName(name), OK);
     }
 
-    @ApiOperation(value = "Exclua um curso específico e todas as perguntas e escolhas relacionadas e retorne 200")
+    @ApiOperation(value = "Exclua um curso específico e todas as perguntas e escolhas relacionadas e retorne 200 Ok sem corpo")
     @DeleteMapping(path = "{id}")
     @Transactional
     public ResponseEntity<?> delete(@PathVariable long id) {
@@ -56,7 +56,7 @@ public class CourseEndpoint {
         return new ResponseEntity<>(OK);
     }
 
-    @ApiOperation(value = "Atualize o curso e retorne 200")
+    @ApiOperation(value = "Atualize o curso e retorne 200 Ok sem corpo")
     @PutMapping
     public ResponseEntity<?> update(@Valid @RequestBody Course course) {
         validateCourseExistenceOnDB(course.getId());
@@ -68,7 +68,7 @@ public class CourseEndpoint {
         service.throwResourceNotFoundIfDoesNotExist(id, courseRepository, "Curso não encontrado");
     }
 
-    @ApiOperation(value = "Crie um curso e retorne-o")
+    @ApiOperation(value = "Criar curso e retornar o curso criado")
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody Course course) {
         course.setProfessor(endpointUtil.extractProfessorFromToken());

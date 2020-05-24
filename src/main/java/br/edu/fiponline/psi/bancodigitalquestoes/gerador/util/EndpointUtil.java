@@ -16,12 +16,12 @@ import java.util.List;
 @Service
 public class EndpointUtil implements Serializable {
     public ResponseEntity<?> returnObjectOrNotFound(Object object) {
-        if (object == null) throw new ResourceNotFoundException("Not found");
+        if (object == null) throw new ResourceNotFoundException("Não encontrado");
         return new ResponseEntity<>(object, HttpStatus.OK);
     }
 
     public ResponseEntity<?> returnObjectOrNotFound(List<?> list) {
-        if (list == null || list.isEmpty()) throw new ResourceNotFoundException("Not found");
+        if (list == null || list.isEmpty()) throw new ResourceNotFoundException("Não encontrado");
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 

@@ -54,7 +54,7 @@ public class ChoiceEndpoint {
     }
 
     @ApiOperation(value = "Crie uma escolha e retorne a escolha criada",
-            notes = "Se a resposta correta dessa opção for verdadeira, a resposta correta de todas as outras opções relacionadas a esta questão será atualizada para false")
+            notes = "Se a resposta correta dessa opção for verdadeira, a resposta correta de todas as outras opções relacionadas a esta questão será atualizada para falsa")
     @PostMapping
     @Transactional
     public ResponseEntity<?> create(@Valid @RequestBody Choice choice) {
@@ -65,8 +65,8 @@ public class ChoiceEndpoint {
         return new ResponseEntity<>(savedChoice, OK);
     }
 
-    @ApiOperation(value = "Atualize a escolha e retorne 200",
-            notes = "Se a resposta correta dessa opção for verdadeira, a resposta correta de todas as outras opções relacionadas a esta questão será atualizada para false")
+    @ApiOperation(value = "Atualize a escolha e retorne 200 Ok sem corpo",
+            notes = "Se a resposta correta dessa opção for verdadeira, a resposta correta de todas as outras opções relacionadas a esta questão será atualizada para falsa")
     @PutMapping
     @Transactional
     public ResponseEntity<?> update(@Valid @RequestBody Choice choice) {
@@ -76,7 +76,7 @@ public class ChoiceEndpoint {
         return new ResponseEntity<>(OK);
     }
 
-    @ApiOperation(value = "Exclua uma opção específica e retorne 200")
+    @ApiOperation(value = "Exclua uma opção específica e retorne 200 Ok sem corpo")
     @DeleteMapping(path = "{id}")
     public ResponseEntity<?> delete(@PathVariable long id) {
         service.throwResourceNotFoundIfDoesNotExist(id, choiceRepository, "A escolha não foi encontrada");
